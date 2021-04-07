@@ -16,7 +16,7 @@ class Speaker {
 
             this.oscillator.frequency.setValueAtTime(frequency || 440, this.audioCtx.currentTime)
 
-            this.oscillator.type = 'squaree';
+            this.oscillator.type = 'square';
 
             this.oscillator.connect(this.gain)
             this.oscillator.start()

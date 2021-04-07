@@ -22,6 +22,28 @@ class CPU {
         this.speed = 10
     }
 
+
+    reset(){
+        this.renderer.clear()
+        
+        this.memory = new Uint8Array(4096)
+
+        this.v = new Uint8Array(16)
+
+        this.i = 0
+
+        this.delayTimer = 0
+        this.soundTimer = 0
+
+        this.pc = 0x200
+
+        this.stack = new Array()
+
+        this.paused = false
+
+        this.speed = 10
+    }
+
     loadSpritesIntoMemory(){
         const sprites = [
             0xF0, 0x90, 0x90, 0x90, 0xF0, // 0

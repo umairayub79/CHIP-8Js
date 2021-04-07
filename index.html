@@ -5,11 +5,108 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="lib/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <canvas></canvas>
 
+    <img src="./logo.png" width="300" height="200" alt="">
+    <div class="main">
+        <canvas width="640" height="320"></canvas>
+
+        <div>
+          <select id="rom_selector">
+            <option disabled="" selected="">Load ROM...</option>
+          </select>
+          <button id="enable-full-screen">Full Screen</button>
+          <h4>Commands</h4>
+          <table class="table table-condensed commands">
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td>q</td>
+              <td>w</td>
+              <td>e</td>
+              <td>r</td>
+            </tr>
+            <tr>
+              <td>a</td>
+              <td>s</td>
+              <td>d</td>
+              <td>f</td>
+            </tr>
+            <tr>
+              <td>z</td>
+              <td>x</td>
+              <td>c</td>
+              <td>v</td>
+            </tr>
+          </table>
+          <p>Controls vary from game to game. I suggest button mashing.</p>
+          <p>Good one to start with is Invaders: W to start, then Q moves left, E moves right and W shoots</p>
+      </div>
+    </div>
+    <a href="https://github.com/umairayub79/CHIP-8Js"><u>Source Code</u></a>
+    
     <script type="module" src="./scripts/chip8.js"></script>
+    <script>
+      // Full screen mode.
+				(function() {
+          var canvas = document.querySelector('canvas')
+					var launchFullScreen = (canvas.requestFullScreen ||
+					                    canvas.mozRequestFullScreen ||
+									    canvas.webkitRequestFullScreen).bind(canvas, Element.ALLOW_KEYBOARD_INPUT);
+										
+					var makeEvent = function(prefix) {
+						return "on" + prefix + "fullscreenchange";					
+					};
+															
+					var fullScreenEvent = ["", "webkit", "moz"].filter(function(prefix) {
+						return document.hasOwnProperty(makeEvent(prefix));
+					}).map(function(prefix) { return makeEvent(prefix); })[0];
+					
+					var getFullScreenElement = function () {
+						return document.fullscreenElement ||
+											document.webkitFullscreenElement ||
+											document.mozFullscreenElement;
+					};
+
+					document.querySelector("#enable-full-screen").addEventListener("click", function() {
+						if ( ! launchFullScreen) {
+							alert("Full screen not supported.");
+						} else {
+							launchFullScreen();
+						}
+					});
+									
+					document[fullScreenEvent] = function() {
+						if ( ! getFullScreenElement()) {
+							chRenderer.setCellSize(CELL_SIZE);
+							return;
+						} 
+						
+						var width = screen.width;
+						var height = screen.height;
+						
+						var chWidth = ch.getDisplayWidth();
+						var chHeight = ch.getDisplayHeight();
+						
+						var cellsWidth = Math.floor(width / chWidth) - 1;
+						var cellsHeight = Math.floor(height / chHeight) - 1;
+						
+						var cellSize = Math.min(cellsWidth, cellsHeight);
+		
+						chRenderer.setCellSize(cellSize);
+
+					};
+
+				})();
+    </script>
+
 </body>
 </html>

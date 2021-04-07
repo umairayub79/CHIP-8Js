@@ -34,6 +34,7 @@ class Renderer {
 
     clear() {
         this.display = new Array(this.cols * this.rows)
+        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
     }
 
     render() {
@@ -45,7 +46,7 @@ class Renderer {
             let y = Math.floor(i / this.cols) * this.scale
 
             if (this.display[i]){
-                this.ctx.fillStyle = '#000'
+                this.ctx.fillStyle = '#33ff66'
 
                 this.ctx.fillRect(x, y, this.scale, this.scale)
             }
@@ -59,18 +60,3 @@ class Renderer {
 }
 
 export default Renderer;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
