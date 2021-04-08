@@ -5,23 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CHIP-8 Emulator</title>
+    <script type="module" src="./scripts/chip8.js"></script>
     <link href="lib/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
 
     <img src="./logo.png" width="300" height="200" alt="CHIP-8 Emulator">
-    <div class="main">
-        <canvas width="640" height="320"></canvas>
 
-        <div>
-          <select id="rom_selector">
-            <option disabled="" selected="">Load ROM...</option>
-          </select>
+    <div class="main">
+
+        <canvas ></canvas>
+
+        <div class="cont">
+
+            <select id="rom_selector">
+              <option disabled="" selected="">Load ROM...</option>
+            </select>
+
           <button id="enable-full-screen">Full Screen</button>
+
           <h4>Commands</h4>
-          <table class="table table-condensed commands">
+
+          <table class="table table-condensed commands center">
             <tr>
               <td>1</td>
               <td>2</td>
@@ -47,13 +54,14 @@
               <td>v</td>
             </tr>
           </table>
+
           <p>Controls vary from game to game. I suggest button mashing.</p>
           <p>Good one to start with is Invaders: W to start, then Q moves left, E moves right and W shoots</p>
       </div>
     </div>
     <a href="https://github.com/umairayub79/CHIP-8Js"><u>Source Code</u></a>
     
-    <script type="module" src="./scripts/chip8.js"></script>
+    
     <script>
       // Full screen mode.
 				(function() {

@@ -72,8 +72,10 @@ if (event.target.value != "") {
     cpu.reset()
     cpu.loadRom(event.target.value);
     init()
+    romSelector.blur()
 
 
 }}, false);
+
 
 init()
