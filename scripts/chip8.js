@@ -58,6 +58,23 @@ function step() {
     loop = requestAnimationFrame(step)
 }
 
+
+function readTextFile(file, callback) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.overrideMimeType("application/json");
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function() {
+        if (rawFile.readyState === 4 && rawFile.status == "200") {
+            callback(rawFile.responseText);
+        }
+    }
+    rawFile.send(null);
+}
+
+
+
+
+
 var romSelector = document.getElementById("rom_selector");
 loop = requestAnimationFrame(step)
 for (var i = 0, romsCount = ROMS.length; i < romsCount; i++) {
@@ -70,7 +87,12 @@ for (var i = 0, romsCount = ROMS.length; i < romsCount; i++) {
 romSelector.addEventListener("change", function(event) {
 if (event.target.value != "") {
     cpu.reset()
-    cpu.loadRom(event.target.value);
+    readTextFile("../data/roms.json", function(text){
+        var data = JSON.parse(text);
+        console.log(data[event.target.value])
+        cpu.loadProgramIntoMemory(data[event.target.value].data)
+        init()
+    });
     init()
     romSelector.blur()
 

@@ -76,33 +76,33 @@ class CPU {
     }
 
     loadRom(romName) {
-        var request = new XMLHttpRequest
-        var self = this
+        // var request = new XMLHttpRequest
+        // var self = this
         
 
-        request.onreadystatechange = function() {
-            if (request.readyState !== 4)  { return; }
-            if (request.status !== 200)  {
-                console.error('Could not load ROM file: ' + request.statusText);
-                if (typeof errorCallback === 'function') {
-                    errorCallback.call(chip8, request);
-                }
-            }
-            if (typeof errorCallback === 'function') {
-                errorCallback.call(chip8, request);
-            }
-        };
-        request.onload = function() {
-            if (request.response) {
-                let program = new Uint8Array(request.response)
-                self.loadProgramIntoMemory(program)
-            }
-        }
+        // request.onreadystatechange = function() {
+        //     if (request.readyState !== 4)  { return; }
+        //     if (request.status !== 200)  {
+        //         console.error('Could not load ROM file: ' + request.statusText);
+        //         if (typeof errorCallback === 'function') {
+        //             errorCallback.call(chip8, request);
+        //         }
+        //     }
+        //     if (typeof errorCallback === 'function') {
+        //         errorCallback.call(chip8, request);
+        //     }
+        // };
+        // request.onload = function() {
+        //     if (request.response) {
+        //         let program = new Uint8Array(request.response)
+        //         self.loadProgramIntoMemory(program)
+        //     }
+        // }
 
-        request.open('GET', 'roms/' + romName)
-        request.responseType = 'arraybuffer'
+        // request.open('GET', 'roms/' + romName)
+        // request.responseType = 'arraybuffer'
 
-        request.send()
+        // request.send()
     }
 
     cycle() {
