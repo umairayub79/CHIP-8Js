@@ -18,12 +18,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
+}
 
-.container-narrow {
-    margin: 0 auto;
-    max-width: 960px;
-  }
 .main {
   display: flex;
   flex-direction: row;
@@ -31,6 +27,20 @@ body {
   margin: 0 auto;
   text-align: center;
 }
+
+.settings {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+
+.cont{
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+}
+
 img {
   margin-bottom: 30px;
 }
@@ -41,9 +51,8 @@ select {
   background: transparent !important;
   border-radius: 0;
   outline: none;
+  margin: 10px;
   font-size: 20px;
-  height: fit-content;
-  padding: 5px;
 }
 
 option {
@@ -51,12 +60,11 @@ option {
 }
 
 button {
+  margin: 10px;
   color: #33ff66;
   background: none;
   border: 1px solid #33ff66;
   font-size: 20px;
-  padding: 5px;
-  width: 100%;
 }
 button:hover{
   color: black;
@@ -89,3 +97,4 @@ a:focus {
   color: black;
   text-decoration: none;
 }
+

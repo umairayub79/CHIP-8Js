@@ -14,17 +14,20 @@
 
     <img src="./logo.png" width="300" height="200" alt="CHIP-8 Emulator">
 
-    <div class="main">
 
+    <div class="settings">
+      <select id="rom_selector">
+        <option disabled="" selected="">Load ROM...</option>
+      </select>
+
+      <button id="enable-full-screen">Full Screen</button>
+    </div>
+
+    <div class="main">
+        
         <canvas ></canvas>
 
         <div class="cont">
-
-            <select id="rom_selector">
-              <option disabled="" selected="">Load ROM...</option>
-            </select>
-
-          <button id="enable-full-screen">Full Screen</button>
 
           <h4>Commands</h4>
 
