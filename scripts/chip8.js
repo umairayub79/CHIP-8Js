@@ -35,26 +35,17 @@ const ROMS = [
   ]
 let loop
 
-let fps = 60, fpsInterval, startTime, now, then, elapsed
+let fps = 60, fpsInterval, startTime
 
 function init() {
     fpsInterval = 1000 / fps
-    then = Date.now()
-    startTime = then
+    startTime = Date.now()
 
     renderer.render()
-
-    cpu.loadSpritesIntoMemory()
 }
 
 function step() {
-    now = Date.now()
-    elapsed = now - then
-
-    if (elapsed > fpsInterval) {
-        cpu.cycle()
-    }
-
+    cpu.cycle()
     loop = requestAnimationFrame(step)
 }
 
@@ -76,5 +67,9 @@ if (event.target.value != "") {
 
 
 }}, false);
-
+var resetButton = document.getElementById("reset_button");
+resetButton.addEventListener("click", function() {
+    romSelector.value = "Load ROM...";
+    cpu.reset()
+})
 init()

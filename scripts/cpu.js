@@ -20,6 +20,8 @@ class CPU {
             this.paused = false
     
             this.speed = 10
+
+            this.loadSpritesIntoMemory()
         }
     
     
@@ -42,6 +44,9 @@ class CPU {
             this.paused = false
     
             this.speed = 10
+
+            this.loadSpritesIntoMemory()
+
         }
     
         loadSpritesIntoMemory(){
@@ -70,6 +75,7 @@ class CPU {
         }
     
         loadProgramIntoMemory(program) {
+            this.reset()
             for (let loc = 0; loc < program.length; loc++) {
                 this.memory[0x200 + loc] = program[loc];
             }
@@ -108,7 +114,8 @@ class CPU {
         cycle() {
             for (let i = 0; i < this.speed; i++) {
                 if (!this.paused) {
-                    let opcode = (this.memory[this.pc] << 8 | this.memory[this.pc + 1])
+                    const opcode = (this.memory[this.pc] << 8 | this.memory[this.pc + 1])
+                    this.pc += 2
                     this.executeInstruction(opcode)
                 }
             }
@@ -140,8 +147,6 @@ class CPU {
         }
     
         executeInstruction(opcode) {
-            this.pc += 2
-    
             let x = (opcode & 0x0F00) >> 8
     
             let y = (opcode & 0x00F0) >> 4
@@ -269,7 +274,7 @@ class CPU {
                             // If the bit (sprite) is not 0, render/erase the pixel
                             if ((sprite & 0x80) > 0) {
                                 // If setPixel returns 1, which means a pixel was erased, set VF to 1
-                                if (this.renderer.setPixel(this.v[x] + col, this.v[y] + row)) {
+                                if (this.renderer.setPixel(this.v[x] + col, this.v[y] + row, !!(sprite & 0x80))) {
                                     this.v[0xF] = 1;
                                 }
                             }
